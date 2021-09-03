@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_news_app/common/navigation.dart';
 import 'package:flutter_news_app/data/models/article.dart';
@@ -66,13 +65,13 @@ class NotificationHelper {
     var titleNotification = "<b>Headline News</b>";
     var titleNews = articles.articles[0].title;
 
-    // await flutterLocalNotificationsPlugin.show(
-    //     0, titleNotification, titleNews, platformChannelSpecifics,
-    //     payload: jsonEncode(articles.toJson()));
-
-    await flutterLocalNotificationsPlugin.periodicallyShow(1, titleNotification,
-        titleNews, RepeatInterval.everyMinute, platformChannelSpecifics,
+    await flutterLocalNotificationsPlugin.show(
+        0, titleNotification, titleNews, platformChannelSpecifics,
         payload: jsonEncode(articles.toJson()));
+
+    // await flutterLocalNotificationsPlugin.periodicallyShow(1, titleNotification,
+    //     titleNews, RepeatInterval.everyMinute, platformChannelSpecifics,
+    //     payload: jsonEncode(articles.toJson()));
   }
 
   void configureSelectNotificationSubject(String route) {
