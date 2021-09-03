@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_app/widgets/cutom_scaffold_dart.dart';
+import 'package:flutter_news_app/widgets/cutom_scaffold.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ArticleWebView extends StatelessWidget {

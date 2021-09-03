@@ -13,7 +13,7 @@ class NewsProvider extends ChangeNotifier {
 
   late ArticlesResult _articlesResult;
   String _message = '';
-  ResultState _state = ResultState.HasData;
+  late ResultState _state;
 
   ArticlesResult get articlesResult => _articlesResult;
 

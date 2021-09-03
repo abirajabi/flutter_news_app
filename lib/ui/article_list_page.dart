@@ -6,28 +6,26 @@ import 'package:flutter_news_app/widgets/platform_widget.dart';
 import 'package:provider/provider.dart';
 
 class ArticleListPage extends StatelessWidget {
-  Widget _buildList(BuildContext context) {
+  Widget _buildList() {
     return Consumer<NewsProvider>(
       builder: (context, state, _) {
         if (state.state == ResultState.Loading) {
           return Center(child: CircularProgressIndicator());
+        } else if (state.state == ResultState.HasData) {
+          return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.articlesResult.articles.length,
+            itemBuilder: (context, index) {
+              var article = state.articlesResult.articles[index];
+              return CardArticle(article: article);
+            },
+          );
+        } else if (state.state == ResultState.NoData) {
+          return Center(child: Text(state.message));
+        } else if (state.state == ResultState.Error) {
+          return Center(child: Text(state.message));
         } else {
-          if (state.state == ResultState.HasData) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: state.articlesResult.articles.length,
-              itemBuilder: (context, index) {
-                var article = state.articlesResult.articles[index];
-                return CardArticle(article: article);
-              },
-            );
-          } else if (state.state == ResultState.NoData) {
-            return Center(child: Text(state.message));
-          } else if (state.state == ResultState.Error) {
-            return Center(child: Text(state.message));
-          } else {
-            return Center(child: Text(''));
-          }
+          return Center(child: Text(''));
         }
       },
     );
@@ -45,15 +43,16 @@ class ArticleListPage extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('News App'),
+        transitionBetweenRoutes: false,
       ),
-      child: _buildList(context),
+      child: _buildList(),
     );
   }
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('News App')),
-      body: _buildList(context),
+      body: _buildList(),
     );
   }
 }

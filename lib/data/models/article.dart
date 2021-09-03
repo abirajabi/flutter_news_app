@@ -18,6 +18,8 @@ class ArticlesResult {
 
   String status;
   int totalResults;
+  List<Article> articles;
+
   factory ArticlesResult.fromJson(Map<String, dynamic> json) => ArticlesResult(
         status: json["status"],
         totalResults: json["totalResults"],
@@ -29,8 +31,6 @@ class ArticlesResult {
                 article.publishedAt != null &&
                 article.content != null)),
       );
-
-  List<Article> articles;
 
   Map<String, dynamic> toJson() => {
         "status": status,

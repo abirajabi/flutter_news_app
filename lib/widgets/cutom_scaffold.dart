@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/common/navigation.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget body;
@@ -8,14 +11,15 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Stack(
-        children: [
-          body,
-          _buildShortAppBar(context),
-        ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            body,
+            _buildShortAppBar(context),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   Card _buildShortAppBar(BuildContext context) {
@@ -30,9 +34,11 @@ class CustomScaffold extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: defaultTargetPlatform == TargetPlatform.iOS
+                ? Icon(CupertinoIcons.back)
+                : Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context);
+              Navigation.back();
             },
           ),
           Padding(

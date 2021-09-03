@@ -4,14 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/data/api/api_service.dart';
 import 'package:flutter_news_app/provider/news_provider.dart';
+import 'package:flutter_news_app/provider/scheduling_provider.dart';
 import 'package:flutter_news_app/ui/settings_page.dart';
+import 'package:flutter_news_app/utils/notification_helper.dart';
 import 'package:provider/provider.dart';
 
+import 'article_detail_page.dart';
 import 'article_list_page.dart';
 import '../widgets/platform_widget.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = '/article_list';
+  static const routeName = '/home_page';
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -20,15 +23,31 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
   static const String _headlineText = 'Headline';
+  final NotificationHelper _notificationHelper = NotificationHelper();
 
   List<Widget> _listWidget = [
     ChangeNotifierProvider<NewsProvider>(
       create: (_) => NewsProvider(apiService: ApiService()),
       child: ArticleListPage(),
     ),
-    ArticleListPage(),
-    SettingsPage(),
+    ChangeNotifierProvider<SchedulingProvider>(
+      create: (_) => SchedulingProvider(),
+      child: SettingsPage(),
+    ),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(ArticleDetailPage.routeName);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    selectNotificationSubject.close();
+  }
 
   List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
