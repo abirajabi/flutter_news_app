@@ -33,3 +33,59 @@ final TextTheme myTextTheme = TextTheme(
   overline: GoogleFonts.libreFranklin(
       fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
+
+ThemeData lightTheme = ThemeData(
+  textTheme: myTextTheme,
+  primarySwatch: Colors.blue,
+  primaryColor: primaryColor,
+  accentColor: secondaryColor,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  appBarTheme: AppBarTheme(
+    textTheme: myTextTheme.apply(bodyColor: Colors.black),
+    elevation: 0,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: secondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      textStyle: TextStyle(),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
+);
+
+final Color darkPrimaryColor = Color(0xFF000000);
+final Color darkSecondaryColor = Color(0xff64ffda);
+
+ThemeData darkTheme = ThemeData.dark().copyWith(
+  primaryColor: darkPrimaryColor,
+  accentColor: darkSecondaryColor,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme,
+  appBarTheme: AppBarTheme(
+    textTheme: myTextTheme.apply(bodyColor: Colors.white),
+    elevation: 0,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: darkSecondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      textStyle: TextStyle(),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
+);

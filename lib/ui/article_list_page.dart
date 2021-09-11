@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/common/const.dart';
 import 'package:flutter_news_app/provider/news_provider.dart';
 import 'package:flutter_news_app/widgets/card_artilce.dart';
 import 'package:flutter_news_app/widgets/platform_widget.dart';

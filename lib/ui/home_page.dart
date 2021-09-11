@@ -2,13 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_app/data/api/api_service.dart';
-import 'package:flutter_news_app/provider/news_provider.dart';
-import 'package:flutter_news_app/provider/scheduling_provider.dart';
+import 'package:flutter_news_app/ui/bookmark_page.dart';
 import 'package:flutter_news_app/ui/settings_page.dart';
 import 'package:flutter_news_app/utils/notification_helper.dart';
-import 'package:provider/provider.dart';
-
 import 'article_detail_page.dart';
 import 'article_list_page.dart';
 import '../widgets/platform_widget.dart';
@@ -26,14 +22,9 @@ class _HomePageState extends State<HomePage> {
   final NotificationHelper _notificationHelper = NotificationHelper();
 
   List<Widget> _listWidget = [
-    ChangeNotifierProvider<NewsProvider>(
-      create: (_) => NewsProvider(apiService: ApiService()),
-      child: ArticleListPage(),
-    ),
-    ChangeNotifierProvider<SchedulingProvider>(
-      create: (_) => SchedulingProvider(),
-      child: SettingsPage(),
-    ),
+    ArticleListPage(),
+    BookmarksPage(),
+    SettingsPage(),
   ];
 
   @override
@@ -54,8 +45,11 @@ class _HomePageState extends State<HomePage> {
         icon: Icon(Platform.isIOS ? CupertinoIcons.news : Icons.public),
         label: _headlineText),
     BottomNavigationBarItem(
+        icon: Icon(Platform.isIOS ? CupertinoIcons.bookmark : Icons.bookmark),
+        label: BookmarksPage.bookmarksTitle),
+    BottomNavigationBarItem(
         icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
-        label: SettingsPage.settingsTitle)
+        label: SettingsPage.settingsTitle),
   ];
 
   void _onBottomNavTapped(int index) {
